@@ -1,12 +1,3 @@
-Parfait Prof Reda 👨‍🏫🔥
-Voici la **version finale complète** et fusionnée de ta **Séance 01**, enrichie avec :
-
-* Explication des **mainframes**, leur coût, et la problématique résolue par la virtualisation
-* Comparaison **machine physique vs VM** avec schéma explicatif
-* Tous les éléments précédents (CPU, RAM, stockage, GPU, VRAM, processeurs puissants, benchmark…)
-* Style professeur expliquant avec esprit académique et emojis
-
----
 
 # 📦 `virtualisation-de-base`
 
