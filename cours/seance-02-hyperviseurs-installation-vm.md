@@ -400,4 +400,36 @@ Celui qui comprend l’hyperviseur… comprend le Cloud ☁️🚀
 ---
 
 
-Dis-moi la prochaine étape 🔥
+## 1️⃣ Pourquoi VMware est-il plus performant que VirtualBox ?
+
+VMware possède un moteur de virtualisation plus optimisé, une meilleure gestion du CPU, de la RAM et du GPU.
+Il est conçu pour des environnements professionnels, tandis que VirtualBox est plus académique et généraliste.
+
+---
+
+## 2️⃣ Pourquoi ne doit-on pas allouer toute la RAM à une VM ?
+
+Parce que l’OS hôte a aussi besoin de mémoire.
+Si toute la RAM est donnée à la VM, le système devient lent, utilise le swap disque et peut se bloquer.
+
+---
+
+## 3️⃣ Quelle différence entre NAT et Bridged ?
+
+* **NAT** : la VM partage la connexion du PC et reste invisible sur le réseau local.
+* **Bridged** : la VM reçoit une IP du réseau et se comporte comme une vraie machine physique.
+
+---
+
+## 4️⃣ Quelle différence entre Player et Pro ?
+
+* **Player** : version gratuite, fonctionnalités limitées.
+* **Pro** : version complète avec snapshots, clonage et gestion avancée.
+
+---
+
+## 5️⃣ Pourquoi l’hyperviseur Type 1 est utilisé en Data Center ?
+
+Parce qu’il est installé directement sur le matériel, sans OS intermédiaire.
+Résultat : meilleures performances, stabilité et sécurité. 🚀
+
