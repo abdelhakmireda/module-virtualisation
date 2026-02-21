@@ -273,5 +273,3 @@ C’est la base fondamentale avant :
 
 ---
 
-
-On continue avec quelle partie du module ? 🚀
