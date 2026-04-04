@@ -208,7 +208,73 @@ Toutes les machines communiquent **via le switch virtuel**.
 
 ---
 
-# 🔐 PARTIE 8 — Simulation d’un Serveur
+# 🔐 PARTIE 8 — Introduction au protocole SSH (à insérer avant l’installation)
+
+## 📜 Définition
+
+SSH (Secure Shell) est un protocole réseau qui permet de :
+
+✔ se connecter à distance à une machine
+✔ exécuter des commandes à distance
+✔ administrer un serveur de manière sécurisée
+
+---
+
+## 🔐 Pourquoi SSH est sécurisé ?
+
+Contrairement à des protocoles anciens (comme Telnet) :
+
+❌ Telnet → données non chiffrées
+✔ SSH → données chiffrées
+
+👉 Les informations (mot de passe, commandes) sont protégées contre l’interception.
+
+---
+
+## 🖥️ Fonctionnement de SSH
+
+SSH fonctionne selon le modèle **Client / Serveur** :
+
+* Le **client** (VM1) envoie une demande de connexion
+* Le **serveur** (VM3) écoute sur le port 22
+* Une connexion sécurisée est établie
+
+---
+
+## ⚙️ Étapes d’une connexion SSH
+
+1️⃣ Le client contacte le serveur
+2️⃣ Le serveur envoie sa clé
+3️⃣ Le client valide la connexion
+4️⃣ L’utilisateur s’authentifie (mot de passe)
+5️⃣ Une session distante est ouverte
+
+---
+
+## 🎯 Objectif dans ce TP
+
+Dans ce TP, SSH permet de :
+
+✔ simuler un accès à un serveur distant
+✔ comprendre le fonctionnement d’un service réseau
+✔ manipuler une architecture client / serveur
+
+---
+
+## 🌍 Importance dans le monde réel
+
+SSH est utilisé dans :
+
+✔ Cloud Computing
+✔ Administration système
+✔ Cybersécurité
+✔ DevOps
+
+👉 Exemple : un administrateur peut gérer un serveur à distance sans accès physique.
+
+---
+
+# 🔐 PARTIE 9 — Simulation d’un Serveur (SSH)
 
 Dans **VM3 (Serveur)** installer SSH :
 
