@@ -208,8 +208,7 @@ Toutes les machines communiquent **via le switch virtuel**.
 
 ---
 
-# 🔐 PARTIE 8 — Introduction au protocole SSH (à insérer avant l’installation)
-
+# 🔐 PARTIE 8 — Introduction au protocole SSH
 ## 📜 Définition
 
 SSH (Secure Shell) est un protocole réseau qui permet de :
