@@ -291,6 +291,175 @@ ssh user@IP_SERVEUR
 
 ---
 
+---
+
+# ⚠️ 🛠️ PARTIE 9 — Résolution des problèmes (Virtualisation VMware / KVM)
+
+---
+
+## 🎯 Objectif
+
+Aider l’étudiant à résoudre les problèmes liés à :
+
+❌ impossibilité d’activer VT-x dans VMware
+❌ erreur “Virtualized Intel VT-x/EPT is not supported”
+❌ KVM qui ne fonctionne pas
+
+---
+
+# 🧪 1️⃣ Vérification sous Windows (CMD)
+
+👉 Ouvrir **Invite de commandes (CMD) en administrateur**
+
+```bash
+systeminfo
+```
+
+---
+
+## 🔍 Vérifier cette partie :
+
+👉 Si vous voyez :
+
+```text
+Un hyperviseur a été détecté
+```
+
+❌ PROBLÈME → Hyper-V actif (bloque VMware)
+
+---
+
+## ✅ Résultat attendu :
+
+✔ PAS de ligne “hyperviseur détecté”
+✔ Virtualisation activée : Oui
+
+---
+
+# ⚠️ 2️⃣ Problème principal
+
+💬 Prof :
+
+> Si un hyperviseur est détecté…
+> 👉 VMware ne peut pas utiliser la virtualisation matérielle
+
+👉 Donc :
+
+❌ KVM ne fonctionnera pas
+❌ virt-manager échouera
+
+---
+
+# 🔧 3️⃣ Solution — Désactiver Hyper-V (OBLIGATOIRE)
+
+---
+
+## 🧪 Étape 1 — CMD (Admin)
+
+```bash
+bcdedit /set hypervisorlaunchtype off
+```
+
+---
+
+## 🧪 Étape 2 — Désactiver fonctionnalités Windows
+
+```bash
+dism.exe /Online /Disable-Feature:Microsoft-Hyper-V-All
+```
+
+```bash
+dism.exe /Online /Disable-Feature:VirtualMachinePlatform
+```
+
+```bash
+dism.exe /Online /Disable-Feature:HypervisorPlatform
+```
+
+```bash
+dism.exe /Online /Disable-Feature:Containers-DisposableClientVM
+```
+
+---
+
+## 🧪 Étape 3 — Désactiver sécurité VBS
+
+```bash
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v EnableVirtualizationBasedSecurity /t REG_DWORD /d 0 /f
+```
+
+```bash
+reg add "HKLM\System\CurrentControlSet\Control\Lsa" /v LsaCfgFlags /t REG_DWORD /d 0 /f
+```
+
+---
+
+## 🔁 Étape 4 — Redémarrage
+
+```bash
+shutdown /r /t 0
+```
+
+---
+
+# 🧪 4️⃣ Vérification après correction
+
+```bash
+systeminfo
+```
+
+---
+
+## ✅ Résultat attendu :
+
+✔ Plus de ligne “hyperviseur détecté”
+✔ Virtualisation activée
+
+---
+
+# ⚙️ 5️⃣ Configuration VMware
+
+👉 Dans VMware :
+
+✔ Activer :
+
+```
+Virtualize Intel VT-x/EPT or AMD-V/RVI
+```
+
+✔ Activer :
+
+```
+Virtualize IOMMU
+```
+
+❌ Désactiver :
+
+```
+Virtualize CPU performance counters
+```
+
+---
+
+# 🧠 6️⃣ Vérification dans Ubuntu (KVM)
+
+```bash
+lscpu | grep Virtualization
+```
+
+```bash
+lsmod | grep kvm
+```
+
+---
+
+## ✅ Résultat attendu :
+
+✔ VT-x ou AMD-V
+✔ kvm_intel ou kvm_amd
+
+---
+
 # 🎓 Conclusion
 
 💬 Prof :
