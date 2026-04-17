@@ -1,4 +1,5 @@
 
+---
 
 # 📘 🎓 Séance 07 — Introduction à KVM & Virtualisation Native Linux
 
@@ -7,7 +8,7 @@
 
 ---
 
-## 🎬 Introduction (prise de parole)
+# 🎬 Introduction (prise de parole)
 
 Chers étudiants 👨‍🎓👩‍🎓,
 
@@ -22,14 +23,13 @@ Lors de la séance précédente, nous avons compris :
 💬 Prof :
 
 > Jusqu’ici vous utilisiez un simulateur…
->
-> Aujourd’hui, vous allez utiliser une vraie technologie de production.
+> 👉 Aujourd’hui, vous allez utiliser une vraie technologie de production.
 
 ---
 
-## 🧠 1️⃣ C’est quoi KVM ?
+# 🧠 1️⃣ C’est quoi KVM ?
 
-📜 Définition :
+## 📜 Définition
 
 KVM (Kernel-based Virtual Machine) est une technologie de virtualisation intégrée dans le noyau Linux.
 
@@ -46,7 +46,7 @@ KVM (Kernel-based Virtual Machine) est une technologie de virtualisation intégr
 
 ---
 
-## 🏗️ 2️⃣ Architecture KVM
+# 🏗️ 2️⃣ Architecture KVM (vision simple)
 
 ```
 Machines virtuelles
@@ -60,13 +60,12 @@ Matériel physique
 
 💬 Prof :
 
-> Ici… il n’y a plus d’intermédiaire inutile.
->
+> Ici… il n’y a plus d’intermédiaire inutile
 > 👉 accès direct au matériel = performance 🚀
 
 ---
 
-## ⚖️ 3️⃣ VMware vs KVM
+# ⚖️ 3️⃣ VMware vs KVM
 
 | Critère     | VMware Workstation | KVM         |
 | ----------- | ------------------ | ----------- |
@@ -80,13 +79,11 @@ Matériel physique
 💬 Prof :
 
 > VMware = apprendre
-> KVM = travailler
+> 👉 KVM = travailler
 
 ---
 
-## ⚙️ 4️⃣ Prérequis KVM
-
-Pour utiliser KVM :
+# ⚙️ 4️⃣ Prérequis KVM
 
 ✔ CPU support virtualisation (VT-x / AMD-V)
 ✔ virtualisation activée BIOS
@@ -109,24 +106,212 @@ lscpu | grep Virtualization
 
 ---
 
-## 🧩 5️⃣ Les composants de KVM
+# 🧩 5️⃣ Les composants de KVM (PARTIE CLÉ)
 
-KVM fonctionne avec :
+💬 Prof :
 
-✔ QEMU → moteur de virtualisation
-✔ libvirt → gestion
-✔ virt-manager → interface graphique
+> ⚠️ Très important :
+> KVM seul… ne suffit pas
+> 👉 c’est un écosystème complet
+
+---
+
+## 🖧 Schéma global
+
+```
+👨‍💻 Utilisateur
+        │
+        ▼
+🖥️ virt-manager (interface)
+        │
+        ▼
+🎼 libvirt (gestion)
+        │
+        ▼
+⚙️ QEMU (exécution VM)
+        │
+        ▼
+🔥 KVM (noyau Linux)
+        │
+        ▼
+💻 Matériel réel (CPU / RAM)
+```
 
 ---
 
 💬 Prof :
 
-> KVM seul ne suffit pas…
-> c’est un écosystème.
+> Ce schéma… vous devez le comprendre
+> 👉 c’est le fonctionnement réel d’une VM
 
 ---
 
-## 🧠 6️⃣ Pourquoi KVM est utilisé en entreprise ?
+# 🔍 6️⃣ Rôle de chaque composant
+
+---
+
+## 🔥 KVM (le cœur)
+
+* intégré au noyau Linux
+* utilise le CPU réel
+* gère mémoire
+
+💬 Prof :
+
+> KVM = celui qui fait le vrai travail
+
+---
+
+## ⚙️ QEMU (le moteur)
+
+👉 QEMU simule une machine complète
+
+```
+VM
+ │
+ ▼
+QEMU simule :
+ ├── disque dur
+ ├── carte réseau
+ ├── CPU virtuel
+```
+
+💬 Prof :
+
+> QEMU crée l’illusion d’un ordinateur
+
+---
+
+## 🎼 libvirt (le chef d’orchestre)
+
+```
+libvirt
+ ├── créer VM
+ ├── démarrer VM
+ ├── arrêter VM
+ ├── gérer réseau
+ └── gérer stockage
+```
+
+💬 Prof :
+
+> libvirt organise tout…
+> 👉 sans lui, c’est très compliqué
+
+---
+
+## 🖥️ virt-manager (interface)
+
+👉 Interface graphique
+
+💬 Prof :
+
+> C’est ce que vous utilisez…
+> 👉 mais ce n’est que la surface
+
+---
+
+# 🎭 7️⃣ Analogie simple (très importante)
+
+💬 Prof :
+
+> Imaginez un restaurant 🍽️
+
+| Élément          | Rôle      |
+| ---------------- | --------- |
+| 👨‍🍳 KVM        | cuisinier |
+| 🔥 QEMU          | outils    |
+| 🎼 libvirt       | manager   |
+| 🖥️ virt-manager | serveur   |
+
+---
+
+👉 Le client ne voit que le serveur
+👉 mais le travail est derrière
+
+---
+
+# 🔄 8️⃣ Fonctionnement réel (cycle complet)
+
+💬 Prof :
+
+> Quand vous cliquez “Start VM”… voilà ce qui se passe :
+
+```
+1. Vous cliquez
+        │
+        ▼
+2. virt-manager envoie la demande
+        │
+        ▼
+3. libvirt traite
+        │
+        ▼
+4. QEMU exécute
+        │
+        ▼
+5. KVM utilise CPU réel
+        │
+        ▼
+🚀 VM démarre
+```
+
+---
+
+💬 Prof :
+
+> Un simple clic…
+> 👉 déclenche toute une architecture
+
+---
+
+# 🧪 9️⃣ Exemple concret (niveau étudiant)
+
+👉 Créer une VM Ubuntu
+
+```
+virt-manager → libvirt → QEMU → KVM → CPU
+```
+
+---
+
+👉 Résultat :
+
+✔ VM Linux
+✔ disque virtuel
+✔ réseau
+
+---
+
+# 🏢 🔟 Exemple réel (entreprise)
+
+💬 Prof :
+
+> En entreprise, ce n’est pas UNE VM…
+
+---
+
+```
+          🌐 Réseau virtuel
+                │
+ ┌──────────────┼──────────────┐
+ │              │              │
+ ▼              ▼              ▼
+Client1       Client2       Serveur Web
+                                │
+                                ▼
+                         Base de données
+```
+
+---
+
+💬 Prof :
+
+> Tout ça… peut tourner sur une seule machine physique 😄
+
+---
+
+# 🧠 1️⃣1️⃣ Pourquoi KVM est utilisé en entreprise ?
 
 ✔ open source
 ✔ performant
@@ -135,7 +320,7 @@ KVM fonctionne avec :
 
 ---
 
-### 🎓 Exemple réel
+🎓 Exemple réel :
 
 ✔ Proxmox
 ✔ OpenStack
@@ -146,44 +331,66 @@ KVM fonctionne avec :
 💬 Prof :
 
 > Quand vous utilisez le cloud…
-> il y a souvent KVM derrière.
+> 👉 il y a souvent KVM derrière
 
 ---
 
-## 🔄 7️⃣ Transition pédagogique
+# 🔄 1️⃣2️⃣ Transition pédagogique
 
 💬 Prof :
 
 > Avant : vous cliquiez dans VMware
->
-> Maintenant : vous allez comprendre ce qu’il y a derrière.
+> Maintenant : vous comprenez ce qu’il y a derrière
 
 ---
 
-## 🎯 Synthèse
+# 🎯 Synthèse finale
 
 ✔ KVM = virtualisation native
-✔ meilleures performances
-✔ utilisé en production
-✔ base du cloud
+✔ QEMU = moteur
+✔ libvirt = gestion
+✔ virt-manager = interface
 
 ---
 
-## ❓ Questions
+👉 Une VM =
+
+```
+virt-manager → libvirt → QEMU → KVM
+```
+
+---
+
+# ❓ Questions
 
 1️⃣ Pourquoi KVM est plus performant ?
-2️⃣ Quelle différence Type 1 / Type 2 ?
-3️⃣ Quel rôle de QEMU ?
+2️⃣ Différence Type 1 / Type 2 ?
+3️⃣ Rôle de QEMU ?
 4️⃣ Pourquoi Linux est obligatoire ?
 5️⃣ Où utilise-t-on KVM ?
 
 ---
 
-## 🎓 Conclusion
+# 🎓 Conclusion
 
 💬 Prof :
 
 > Aujourd’hui… vous venez de franchir un cap.
->
-> 👉 Vous entrez dans la virtualisation professionnelle.
+
+👉 Vous ne créez plus seulement des VMs
+👉 Vous comprenez comment elles fonctionnent
+
+---
+
+# 🚀 Transition vers TP 05
+
+💬 Prof :
+
+> Maintenant que vous avez compris l’architecture…
+
+👉 il est temps de passer à la pratique
+
+👉 **TP 05 — Installation et utilisation de KVM**
+
+---
 
