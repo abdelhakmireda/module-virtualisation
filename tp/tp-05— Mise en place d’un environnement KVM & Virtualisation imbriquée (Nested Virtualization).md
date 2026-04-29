@@ -472,4 +472,44 @@ lsmod | grep kvm
 
 ---
 
+### ✅ Image recommandée
+
+**Alpine Linux Virt x86_64 ISO**
+Lien officiel : ([alpinelinux.org][1])
+Téléchargement direct dossier : ([dl-cdn.alpinelinux.org][2])
+
+Prends ce fichier :
+
+```text
+alpine-virt-3.23.0-x86_64.iso
+```
+
+Ou la version la plus récente affichée dans le dossier officiel.
+
+### Commande dans Ubuntu
+
+```bash
+cd ~/Downloads
+wget https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/alpine-virt-3.23.0-x86_64.iso
+```
+
+### Configuration conseillée dans virt-manager
+
+```text
+OS : Alpine Linux
+RAM : 512 MB
+CPU : 1
+Disque : 5 GB
+Réseau : NAT
+Image : alpine-virt-3.23.0-x86_64.iso
+```
+
+### Alternative plus simple pour étudiants
+
+**Ubuntu Server Cloud Image 24.04** existe aussi officiellement, mais elle est moins directe pour débutants car elle demande souvent cloud-init/login SSH. ([cloud-images.ubuntu.com][3])
+
+Donc pour ton TP : **Alpine Virt ISO est le meilleur choix**.
+
+
+
 
